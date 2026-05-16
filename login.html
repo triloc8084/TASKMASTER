@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - TaskMaster</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css?v=7">
+</head>
+<body class="clean-auth-body">
+    <main class="clean-auth-page">
+        <section class="clean-auth-card">
+            <a class="clean-brand" href="index.html">
+                <span><i class="fas fa-check-double"></i></span>
+                TaskMaster
+            </a>
+            <div class="clean-auth-header">
+                <h1>Welcome back</h1>
+                <p>Login to continue managing your tasks.</p>
+            </div>
+            <form class="clean-auth-form" id="loginForm">
+                <div class="clean-field">
+                    <label for="email">Email Address</label>
+                    <div class="clean-input">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" name="email" required placeholder="you@example.com">
+                    </div>
+                </div>
+                <div class="clean-field">
+                    <label for="password">Password</label>
+                    <div class="clean-input">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" required placeholder="Enter your password">
+                    </div>
+                </div>
+                <button type="submit" class="clean-primary-btn">Login</button>
+            </form>
+            <p class="clean-auth-switch">
+                Don't have an account? <a href="register.html">Create account</a>
+            </p>
+        </section>
+    </main>
+    <script src="js/auth.js"></script>
+</body>
+</html> 
+

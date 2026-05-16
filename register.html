@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - TaskMaster</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css?v=11">
+</head>
+<body class="clean-auth-body">
+    <main class="clean-auth-page">
+        <section class="clean-auth-card register-card">
+            <a class="clean-brand" href="index.html">
+                <span><i class="fas fa-check-double"></i></span>
+                TaskMaster
+            </a>
+            <div class="clean-auth-header">
+                <h1>Create account</h1>
+                <p>Start organizing your work in one clean dashboard.</p>
+            </div>
+            <form class="clean-auth-form" id="registerForm">
+                <div class="clean-field">
+                    <label for="fullName">Full Name</label>
+                    <div class="clean-input">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name">
+                    </div>
+                </div>
+                <div class="clean-field">
+                    <label for="email">Email Address</label>
+                    <div class="clean-input">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" name="email" required placeholder="you@example.com">
+                    </div>
+                </div>
+                <div class="clean-field">
+                    <label for="password">Password</label>
+                    <div class="clean-input">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" required placeholder="Create a password">
+                    </div>
+                </div>
+                <div class="clean-field">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="clean-input">
+                        <i class="fas fa-shield-alt"></i>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password">
+                    </div>
+                </div>
+                <button type="submit" class="clean-primary-btn">Create Account</button>
+            </form>
+            <p class="clean-auth-switch">
+                Already have an account? <a href="login.html">Login</a>
+            </p>
+        </section>
+    </main>
+    <script src="js/auth.js"></script>
+</body>
+</html> 
+

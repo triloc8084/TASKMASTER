@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css?v=20">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-shell">
+        <header class="topbar glass-header">
+            <div class="brand-word"><i class="fas fa-check-double"></i><span class="brand-label">TaskMaster</span></div>
+            <nav class="top-nav">
+                <ul class="nav-links horizontal-nav">
+                    <li class="active">
+                        <a href="#dashboard" data-view="dashboard"><i class="fas fa-border-all"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#analytics" data-view="analytics"><i class="fas fa-chart-bar"></i> Analytics</a>
+                    </li>
+                    <li>
+                        <a href="#my-task" data-view="my-task"><i class="fas fa-check-square"></i> My Task</a>
+                    </li>
+                    <li>
+                        <a href="#categories" data-view="categories"><i class="fas fa-layer-group"></i> Categories</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="header-right">
+                <div class="search-pill">
+                    <input type="search" id="taskSearchInput" placeholder="Search your task here...">
+                    <button type="button" id="taskSearchBtn"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="top-actions">
+                    <button type="button" id="notificationBtn" title="Notifications"><i class="fas fa-bell"></i></button>
+                    <button type="button" id="themeToggleBtn" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+                    
+                    <!-- Avatar with Dropdown -->
+                    <div class="user-profile-dropdown">
+                        <div class="header-avatar">TM</div>
+                        <div class="dropdown-menu" id="avatarDropdown">
+                            <div class="user-info">
+                                <strong id="dropdownUsername">Test User</strong>
+                                <span id="dropdownEmail">user@example.com</span>
+                            </div>
+                            <hr>
+                            <a href="#" onclick="openModal('profileModal'); return false;"><i class="fas fa-user-cog"></i> Account Settings</a>
+                            <a href="#" data-open-modal="calendarModal"><i class="fas fa-calendar-alt"></i> Calendar</a>
+                            <hr>
+                            <a href="#" id="topLogoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-main full-width-content">
+
+            <section class="welcome-row">
+                <h1>Welcome back, TaskMaster</h1>
+                <div class="team-stack">
+                    <span></span><span></span><span></span><span></span>
+                    <button type="button" id="inviteBtn"><i class="fas fa-user-plus"></i> Invite</button>
+                </div>
+            </section>
+
+            <section class="dashboard-view active" id="dashboardView" data-view-panel="dashboard">
+            <div class="container task-dashboard-card">
+                <div class="section-title">
+                    <span><i class="far fa-clipboard"></i> To-Do</span>
+                    <small>Plan, prioritize, finish</small>
+                </div>
+                
+                <!-- Progress Bar -->
+                <div class="progress-container">
+                    <div class="progress-bar" id="taskProgressBar"></div>
+                </div>
+        
+        <form class="task-form" id="taskForm">
+            <input type="text" id="taskInput" placeholder="What needs to be done?" required>
+            <select id="prioritySelect" required>
+                <option value="low">Low Priority</option>
+                <option value="medium">Medium Priority</option>
+                <option value="high">High Priority</option>
+            </select>
+            <select id="categorySelect">
+                <option value="General">General</option>
+                <option value="Work">Work</option>
+                <option value="Personal">Personal</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Health">Health</option>
+            </select>
+            <input type="date" id="dueDateInput">
+            <button type="submit" class="add-btn">
+                <i class="fas fa-plus"></i> Add Task
+            </button>
+        </form>
+
+        <div class="controls">
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">
+                    <i class="fas fa-list"></i> All <span class="filter-badge" id="allCount">0</span>
+                </button>
+                <button class="filter-btn" data-filter="active">
+                    <i class="fas fa-clock"></i> Active <span class="filter-badge" id="activeCount">0</span>
+                </button>
+                <button class="filter-btn" data-filter="completed">
+                    <i class="fas fa-check"></i> Completed <span class="filter-badge" id="completedCount">0</span>
+                </button>
+            </div>
+            <select id="sortSelect">
+                <option value="date-asc"><i class="fas fa-sort-amount-up"></i> Date (Ascending)</option>
+                <option value="date-desc"><i class="fas fa-sort-amount-down"></i> Date (Descending)</option>
+                <option value="priority"><i class="fas fa-flag"></i> Priority</option>
+            </select>
+        </div>
+
+        <div class="task-list" id="taskList">
+            <!-- Tasks will be dynamically added here -->
+        </div>
+            </div>
+            </section>
+
+            <section class="dashboard-view" id="analyticsView" data-view-panel="analytics">
+                <div class="container analytics-dashboard-card">
+                    <div class="section-title">
+                        <span><i class="fas fa-chart-line"></i> Analytics</span>
+                        <small>Same dashboard, no page change</small>
+                    </div>
+                    <div class="analytics-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-list-check"></i></div>
+                            <div class="stat-info"><h3>Total Tasks</h3><p id="totalTasks">0</p></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                            <div class="stat-info"><h3>Completed</h3><p id="completedTasks">0</p></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                            <div class="stat-info"><h3>Pending</h3><p id="pendingTasks">0</p></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-calendar-xmark"></i></div>
+                            <div class="stat-info"><h3>Overdue</h3><p id="overdueTasks">0</p></div>
+                        </div>
+                    </div>
+                    <div class="insight-grid">
+                        <div class="insight-card">
+                            <h3><i class="fas fa-chart-pie"></i> Status</h3>
+                            <div class="donut-chart" id="statusDonut" style="--done: 0%"></div>
+                            <div class="legend-row">
+                                <span><b class="dot green"></b> Completed</span>
+                                <span><b class="dot yellow"></b> Pending</span>
+                            </div>
+                        </div>
+                        <div class="insight-card">
+                            <h3><i class="fas fa-signal"></i> Priority</h3>
+                            <div class="priority-bars">
+                                <div><span>High</span><b id="highBar"></b><em id="highCount">0</em></div>
+                                <div><span>Medium</span><b id="mediumBar"></b><em id="mediumCount">0</em></div>
+                                <div><span>Low</span><b id="lowBar"></b><em id="lowCount">0</em></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="dashboard-view" id="categoriesView" data-view-panel="categories">
+                <div class="container analytics-dashboard-card">
+                    <div class="section-title">
+                        <span><i class="fas fa-layer-group"></i> Categories</span>
+                        <small>Grouped by priority</small>
+                    </div>
+                    <div class="category-grid" id="categoryGrid"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="app-modal" id="profileModal" aria-hidden="true">
+        <div class="app-modal-card">
+            <button class="modal-x" type="button" data-close-modal="profileModal"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-user-cog"></i> Account Details</h2>
+            <form id="profileForm" class="settings-form">
+                <label>Full Name<input type="text" id="profileName" name="fullName" required></label>
+                <label>Email<input type="email" id="profileEmail" name="email" required></label>
+                <label>New Password<input type="password" id="profilePassword" name="password" placeholder="Leave blank to keep current"></label>
+                <label>Confirm Password<input type="password" id="profileConfirmPassword" name="confirmPassword" placeholder="Confirm new password"></label>
+                <button type="submit" class="clean-primary-btn">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="app-modal" id="notificationModal" aria-hidden="true">
+        <div class="app-modal-card">
+            <button class="modal-x" type="button" data-close-modal="notificationModal"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-bell"></i> Notifications</h2>
+            <div class="panel-list" id="notificationList"></div>
+        </div>
+    </div>
+
+    <div class="app-modal" id="calendarModal" aria-hidden="true">
+        <div class="app-modal-card">
+            <button class="modal-x" type="button" data-close-modal="calendarModal"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-calendar-alt"></i> Calendar</h2>
+            <div class="panel-list" id="calendarList"></div>
+        </div>
+    </div>
+
+    <div class="app-modal" id="inviteModal" aria-hidden="true">
+        <div class="app-modal-card">
+            <button class="modal-x" type="button" data-close-modal="inviteModal"><i class="fas fa-times"></i></button>
+            <h2><i class="fas fa-user-plus"></i> Invite Teammate</h2>
+            <form id="inviteForm" class="settings-form">
+                <label>Email<input type="email" id="inviteEmail" placeholder="friend@example.com" required></label>
+                <button type="submit" class="clean-primary-btn">Create Invite</button>
+            </form>
+            <p class="helper-text">This demo creates a local invite message only. It does not send email.</p>
+        </div>
+    </div>
+
+    <div class="features-modal" id="featuresModal">
+        <div class="modal-content">
+            <h2><i class="fas fa-star"></i> Key Features</h2>
+            <ul>
+                <li><i class="fas fa-plus-circle"></i> Add and manage tasks easily</li>
+                <li><i class="fas fa-layer-group"></i> Prioritize tasks (Low, Medium, High)</li>
+                <li><i class="fas fa-calendar-check"></i> Track tasks with deadlines</li>
+                <li><i class="fas fa-bell"></i> Get reminders for upcoming tasks</li>
+                <li><i class="fas fa-filter"></i> Filter and sort tasks</li>
+                <li><i class="fas fa-chart-line"></i> View task analytics</li>
+            </ul>
+            <button class="close-modal" onclick="closeFeatures()">
+                <i class="fas fa-times"></i> Close
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/app.js?v=12"></script>
+</body>
+</html> 
