@@ -131,5 +131,4 @@ function validateCSRFToken($token) {
         session_start();
     }
     return !empty($token) && hash_equals($_SESSION['csrf_token'] ?? '', $token);
-}
-?> 
+} 
